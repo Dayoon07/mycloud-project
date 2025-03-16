@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.e.d.model.mapper.UserMapper">
+	
+	<resultMap id="userResultMap" type="com.e.d.model.vo.UserVo">
+	    <id property="userId" column="user_id"/>
+	    <result property="username" column="username"/>
+	    <result property="useremail" column="useremail"/>
+	    <result property="password" column="password"/>
+	    <result property="createAt" column="create_at"/>
+	    <result property="fileAccessKey" column="file_access_key"/>
+	</resultMap>
+		
+	<select id="findRecipient" resultMap="userResultMap">
+		SELECT * FROM MYCLOUD_USERS WHERE USEREMAIL LIKE '%' || #{email} || '%'
+	</select>
+	
+</mapper>
