@@ -22,7 +22,7 @@
 ## 개발 기간
 <p style="font-size: large;">2025. 03. 12 ~ 2025. 03. 16</p>
 
-![](https://dayoon07.github.io/static-page-test/img/mycloud-screenshot.png)
+![](https://dayoon07.github.io/static-page-test/img/mycloud-created-date.png)
 
 ## IDE
 
