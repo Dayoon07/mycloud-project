@@ -97,117 +97,117 @@
 - 이미지, 영상 파일만 페이지 내 보기 가능
 - Rest 방식으로 처리할려고 했는데 컨트롤러에 js로 비동기 처리
 
-	```js
-	// 비동기 처리 upload.js 파일
-	function previewFile() {
-		const fileInput = document.getElementById("dropzone-file");
-		const file = fileInput.files[0];
-		const previewContainer = document.getElementById("preview-div");
-		const uploadButton = document.getElementById("upload-btn");
-		const progressBar = document.getElementById("upload-progress");
-		const uploadText = document.getElementById("uploadText");
-		const size = document.getElementById("fileSize");
+```js
+// 비동기 처리 upload.js 파일
+function previewFile() {
+	const fileInput = document.getElementById("dropzone-file");
+	const file = fileInput.files[0];
+	const previewContainer = document.getElementById("preview-div");
+	const uploadButton = document.getElementById("upload-btn");
+	const progressBar = document.getElementById("upload-progress");
+	const uploadText = document.getElementById("uploadText");
+	const size = document.getElementById("fileSize");
 
-		if (file) {
-			document.getElementById("cloudUI").classList.add("hidden");
-			document.getElementById("clse").classList.remove("hidden");
-			document.getElementById("clse").setAttribute("onclick", "cle()");
+	if (file) {
+		document.getElementById("cloudUI").classList.add("hidden");
+		document.getElementById("clse").classList.remove("hidden");
+		document.getElementById("clse").setAttribute("onclick", "cle()");
 
-			const reader = new FileReader();
-			reader.onload = function(e) {
-				let previewElement;
-				if (file.type.startsWith("image")) {
-					previewElement = document.createElement("img");
-					previewElement.src = e.target.result;
-					previewElement.classList.add("rounded", "w-96", "mx-auto");
-				} else if (file.type.startsWith("video")) {
-					previewElement = document.createElement("video");
-					previewElement.src = e.target.result;
-					previewElement.controls = true;
-					previewElement.classList.add("rounded", "w-96", "mx-auto");
-				} else {
-					previewElement = document.createElement("p");
-					previewElement.textContent = file.name;
-					previewElement.classList.add("text-sm", "font-semibold");
-				}
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			let previewElement;
+			if (file.type.startsWith("image")) {
+				previewElement = document.createElement("img");
+				previewElement.src = e.target.result;
+				previewElement.classList.add("rounded", "w-96", "mx-auto");
+			} else if (file.type.startsWith("video")) {
+				previewElement = document.createElement("video");
+				previewElement.src = e.target.result;
+				previewElement.controls = true;
+				previewElement.classList.add("rounded", "w-96", "mx-auto");
+			} else {
+				previewElement = document.createElement("p");
+				previewElement.textContent = file.name;
+				previewElement.classList.add("text-sm", "font-semibold");
+			}
 
-				previewContainer.innerHTML = "";
-				previewContainer.appendChild(previewElement);
-			};
-			reader.readAsDataURL(file);
-			uploadButton.classList.remove("hidden");
-
-			console.log("파일 용량: " + (file.size / 1024 / 1024).toFixed(2) + "MB");
-
-			progressBar.value = 0;
-			progressBar.classList.add("hidden");
-			uploadText.textContent = "업로드 준비 완료";
-		} else {
-			document.getElementById("cloudUI").classList.remove("hidden");
 			previewContainer.innerHTML = "";
-			uploadButton.classList.add("hidden");
-			progressBar.classList.add("hidden");
-			uploadText.textContent = "";
-		}
-	}
+			previewContainer.appendChild(previewElement);
+		};
+		reader.readAsDataURL(file);
+		uploadButton.classList.remove("hidden");
 
-	function cle() {
-		document.getElementById("clse").classList.add("hidden");
-		document.getElementById("dropzone-file").value = "";
-		document.getElementById("preview-div").innerHTML = "";
-		document.getElementById("upload-progress").classList.add("hidden");
-		document.getElementById("uploadText").textContent = "";
-		document.getElementById("upload-btn").classList.add("hidden");
-		document.getElementById("cloudUI").classList.remove("hidden");
-	}
-
-	document.getElementById("upload-btn").addEventListener("click", function() {
-		const fileInput = document.getElementById("dropzone-file");
-		const file = fileInput.files[0];
-		const progressBar = document.getElementById("upload-progress");
-		const uploadText = document.getElementById("uploadText");
-
-		if (!file) {
-			alert("파일을 선택하세요.");
-			return;
-		}
+		console.log("파일 용량: " + (file.size / 1024 / 1024).toFixed(2) + "MB");
 
 		progressBar.value = 0;
-		progressBar.classList.remove("hidden");
-		uploadText.textContent = "업로드 중...";
+		progressBar.classList.add("hidden");
+		uploadText.textContent = "업로드 준비 완료";
+	} else {
+		document.getElementById("cloudUI").classList.remove("hidden");
+		previewContainer.innerHTML = "";
+		uploadButton.classList.add("hidden");
+		progressBar.classList.add("hidden");
+		uploadText.textContent = "";
+	}
+}
 
-		const xhr = new XMLHttpRequest();
-		xhr.open("POST", `${location.origin}/fileupload`, true);
-		xhr.setRequestHeader("Accept", "application/json");
+function cle() {
+	document.getElementById("clse").classList.add("hidden");
+	document.getElementById("dropzone-file").value = "";
+	document.getElementById("preview-div").innerHTML = "";
+	document.getElementById("upload-progress").classList.add("hidden");
+	document.getElementById("uploadText").textContent = "";
+	document.getElementById("upload-btn").classList.add("hidden");
+	document.getElementById("cloudUI").classList.remove("hidden");
+}
 
-		xhr.upload.onprogress = function(event) {
-			if (event.lengthComputable) {
-				const percent = (event.loaded / event.total) * 100;
-				progressBar.value = percent;
-			}
-		};
+document.getElementById("upload-btn").addEventListener("click", function() {
+	const fileInput = document.getElementById("dropzone-file");
+	const file = fileInput.files[0];
+	const progressBar = document.getElementById("upload-progress");
+	const uploadText = document.getElementById("uploadText");
 
-		xhr.onload = function() {
-			if (xhr.status === 200) {
-				uploadText.textContent = "업로드 완료";
-				setTimeout(() => {
-					alert("업로드 성공");
-					location.reload();
-				}, 100);
-			} else {
-				uploadText.textContent = "업로드 실패";
-				alert("업로드 실패");
-			}
-		};
+	if (!file) {
+		alert("파일을 선택하세요.");
+		return;
+	}
 
-		const formData = new FormData();
-		formData.append("file", file);
-		formData.append("fileSize", (file.size / 1024 / 1024).toFixed(2));
-		xhr.send(formData);
-	});
-	```
+	progressBar.value = 0;
+	progressBar.classList.remove("hidden");
+	uploadText.textContent = "업로드 중...";
 
-	![](https://dayoon07.github.io/static-page-test/img/mycloud-upload-screenshot.png)
+	const xhr = new XMLHttpRequest();
+	xhr.open("POST", `${location.origin}/fileupload`, true);
+	xhr.setRequestHeader("Accept", "application/json");
+
+	xhr.upload.onprogress = function(event) {
+		if (event.lengthComputable) {
+			const percent = (event.loaded / event.total) * 100;
+			progressBar.value = percent;
+		}
+	};
+
+	xhr.onload = function() {
+		if (xhr.status === 200) {
+			uploadText.textContent = "업로드 완료";
+			setTimeout(() => {
+				alert("업로드 성공");
+				location.reload();
+			}, 100);
+		} else {
+			uploadText.textContent = "업로드 실패";
+			alert("업로드 실패");
+		}
+	};
+
+	const formData = new FormData();
+	formData.append("file", file);
+	formData.append("fileSize", (file.size / 1024 / 1024).toFixed(2));
+	xhr.send(formData);
+});
+```
+
+![](https://dayoon07.github.io/static-page-test/img/mycloud-upload-screenshot.png)
 
 ### 내 파일
 
@@ -218,7 +218,7 @@
 - 파일 시스템 구현할려고 했는데 빨리 만들고 싶어서 안 함
 - 서버에 현재 로그인한 사용자자의 pk를 넘겨주는 방식으로 해서 절대 내 파일 페이지에서는 다른 사람의 페이지로 들어가는 것을 방지함
 
-	![](https://dayoon07.github.io/static-page-test/img/mycloud-myfile.png)
+![](https://dayoon07.github.io/static-page-test/img/mycloud-myfile.png)
 
 ### 파일 공개 / 비공개 전환
 
@@ -286,113 +286,113 @@ public void changePrivate(Long fileId) {
 - Rest 방식으로 메세지를 DB에 저장
 - 파일 첨부 여부에 따라 send 함수를 오버로딩함
 
-	```java
-	package com.e.d.model.service;
+```java
+package com.e.d.model.service;
 
-	import java.io.File;
-	import java.io.FileOutputStream;
-	import java.io.IOException;
-	import java.time.LocalDateTime;
-	import java.time.format.DateTimeFormatter;
-	import java.util.UUID;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
-	import org.springframework.stereotype.Service;
-	import org.springframework.web.multipart.MultipartFile;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-	import com.e.d.model.entity.MessageEntity;
-	import com.e.d.model.entity.UserEntity;
-	import com.e.d.model.mapper.MessageMapper;
-	import com.e.d.model.repository.MessageRepository;
+import com.e.d.model.entity.MessageEntity;
+import com.e.d.model.entity.UserEntity;
+import com.e.d.model.mapper.MessageMapper;
+import com.e.d.model.repository.MessageRepository;
 
-	import jakarta.servlet.http.HttpSession;
-	import lombok.RequiredArgsConstructor;
-	import lombok.extern.slf4j.Slf4j;
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-	@Slf4j
-	@RequiredArgsConstructor
-	@Service
-	public class MessageService {
+@Slf4j
+@RequiredArgsConstructor
+@Service
+public class MessageService {
 
-		private final MessageRepository messageRepository;
-		private final MessageMapper mapper;
+	private final MessageRepository messageRepository;
+	private final MessageMapper mapper;
 
-		public void send(String resc, String title, String message, long resceiveId, MultipartFile file,
-				HttpSession session) throws IOException {
-			UserEntity user = (UserEntity) session.getAttribute("user");
-			String webPath = session.getServletContext().getRealPath("/resources/mail/");
-			String uuid = UUID.randomUUID().toString().replaceAll("[^a-zA-Z0-9]", "").substring(0, 30);
-			String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-			String extension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-			String fileName = now + "_" + uuid + extension;
+	public void send(String resc, String title, String message, long resceiveId, MultipartFile file,
+			HttpSession session) throws IOException {
+		UserEntity user = (UserEntity) session.getAttribute("user");
+		String webPath = session.getServletContext().getRealPath("/resources/mail/");
+		String uuid = UUID.randomUUID().toString().replaceAll("[^a-zA-Z0-9]", "").substring(0, 30);
+		String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+		String extension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+		String fileName = now + "_" + uuid + extension;
 
-			File webDir = new File(webPath);
-			if (!webDir.exists()) {
-				if (!webDir.mkdirs()) {
-					throw new IOException("웹 업로드 폴더를 생성할 수 없습니다: " + webPath);
-				}
+		File webDir = new File(webPath);
+		if (!webDir.exists()) {
+			if (!webDir.mkdirs()) {
+				throw new IOException("웹 업로드 폴더를 생성할 수 없습니다: " + webPath);
 			}
-
-			File webFile = new File(webDir, fileName);
-
-			try {
-				byte[] fileData = file.getBytes();
-
-				try (FileOutputStream webOutputStream = new FileOutputStream(webFile)) {
-					webOutputStream.write(fileData);
-				}
-			} catch (IOException e) {
-				throw new IOException("파일 저장 중 오류 발생: " + e.getMessage());
-			}
-
-			MessageEntity msg = MessageEntity.builder()
-					.sender(user.getUsername())
-					.receiver(resc)
-					.receiveId(resceiveId)
-					.title(title)
-					.content(message)
-					.datetime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd a HH:mm:ss")))
-					.contentFile("/resources/mail/" + fileName)
-					.build();
-			messageRepository.save(msg);
-		}
-		
-		public void send(String resc, String title, String message, long resceiveId, HttpSession session) throws IOException {
-			UserEntity user = (UserEntity) session.getAttribute("user");
-			MessageEntity msg = MessageEntity.builder()
-					.sender(user.getUsername())
-					.receiver(resc)
-					.receiveId(resceiveId)
-					.title(title)
-					.content(message)
-					.datetime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd a HH:mm:ss")))
-					.build();
-			messageRepository.save(msg);
 		}
 
+		File webFile = new File(webDir, fileName);
+
+		try {
+			byte[] fileData = file.getBytes();
+
+			try (FileOutputStream webOutputStream = new FileOutputStream(webFile)) {
+				webOutputStream.write(fileData);
+			}
+		} catch (IOException e) {
+			throw new IOException("파일 저장 중 오류 발생: " + e.getMessage());
+		}
+
+		MessageEntity msg = MessageEntity.builder()
+				.sender(user.getUsername())
+				.receiver(resc)
+				.receiveId(resceiveId)
+				.title(title)
+				.content(message)
+				.datetime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd a HH:mm:ss")))
+				.contentFile("/resources/mail/" + fileName)
+				.build();
+		messageRepository.save(msg);
 	}
-	```
+	
+	public void send(String resc, String title, String message, long resceiveId, HttpSession session) throws IOException {
+		UserEntity user = (UserEntity) session.getAttribute("user");
+		MessageEntity msg = MessageEntity.builder()
+				.sender(user.getUsername())
+				.receiver(resc)
+				.receiveId(resceiveId)
+				.title(title)
+				.content(message)
+				.datetime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd a HH:mm:ss")))
+				.build();
+		messageRepository.save(msg);
+	}
+
+}
+```
 
 - 여기서부터는 기능이 어떻게 돌아가는 지 이해할려면 js 파일을 봐야됨
 - 기능에 대해 간단히 설명하자면 메세지를 보내면 해당 메일을 가진 사용자의 PK를 DB에 저장, websocket을 이용하지 않아서 실시간은 안됨
 - [compose.js (메세지 보내기, 1번째 이미지 관련됨)](https://github.com/Dayoon07/mycloud-project/blob/main/cloud/src/main/webapp/source/js/compose.js)
 - [chkmsg.js (메세지 확인, 2,3 번째 이미지 관련됨)](https://github.com/Dayoon07/mycloud-project/blob/main/cloud/src/main/webapp/source/js/chkmsg.js)
 
-	```java
-	// 이메일 입력시 관련 이메일 출력
-	@PostMapping("/searchEmails")
-	public List<UserVo> findRecipient(@RequestParam String email) {
-	    List<UserVo> list = userMapper.findRecipient(email);
-	    if (!list.isEmpty()) {
-	    	return list;
-	    } else {
-	    	return Collections.emptyList();
-	    }
+```java
+// 이메일 입력시 관련 이메일 출력
+@PostMapping("/searchEmails")
+public List<UserVo> findRecipient(@RequestParam String email) {
+	List<UserVo> list = userMapper.findRecipient(email);
+	if (!list.isEmpty()) {
+		return list;
+	} else {
+		return Collections.emptyList();
 	}
-	```
+}
+```
 
-	![](https://dayoon07.github.io/static-page-test/img/mycloud-msg-compose.png)
-	![](https://dayoon07.github.io/static-page-test/img/mycloud-chk-msg.png)
-	![](https://dayoon07.github.io/static-page-test/img/mycloud-chk-msg-content.png)
+![](https://dayoon07.github.io/static-page-test/img/mycloud-msg-compose.png)
+![](https://dayoon07.github.io/static-page-test/img/mycloud-chk-msg.png)
+![](https://dayoon07.github.io/static-page-test/img/mycloud-chk-msg-content.png)
 
 ### 엑세스 키
 
@@ -401,53 +401,54 @@ public void changePrivate(Long fileId) {
 
 - 사용자 계정 생성 시 무조건 발생하는 키 생성 로직
 
-	```java
-	package com.e.d.model.service;
+```java
+package com.e.d.model.service;
 
-	import java.time.LocalDateTime;
-	import java.time.format.DateTimeFormatter;
-	import java.util.UUID;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
-	import org.springframework.beans.factory.annotation.Autowired;
-	import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-	import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
-	import com.e.d.model.entity.UserEntity;
-	import com.e.d.model.repository.UserRepository;
+import com.e.d.model.entity.UserEntity;
+import com.e.d.model.repository.UserRepository;
 
-	import lombok.RequiredArgsConstructor;
-	import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-	@Slf4j
-	@RequiredArgsConstructor
-	@Service
-	public class UserService {
+@Slf4j
+@RequiredArgsConstructor
+@Service
+public class UserService {
 
-		private final UserRepository repository;
+	private final UserRepository repository;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
+	public void insertNewMember(String username, String email, String password) {
+		String n = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss"));
+		String key = UUID.randomUUID().toString().replaceAll("[^a-zA-Z0-9]", "").substring(0, 20);
+		String name = username.replaceAll(" ", "-");
 		
-		@Autowired
-		private BCryptPasswordEncoder passwordEncoder;
+		UserEntity entity = UserEntity.builder()
+				.username(name)
+				.useremail(email)
+				.password(passwordEncoder.encode(password))
+				.createAt(n)
+				.fileAccessKey(key)	// 여기
+				.build();
 		
-		public void insertNewMember(String username, String email, String password) {
-			String n = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss"));
-			String key = UUID.randomUUID().toString().replaceAll("[^a-zA-Z0-9]", "").substring(0, 20);
-			String name = username.replaceAll(" ", "-");
-			
-			UserEntity entity = UserEntity.builder()
-					.username(name)
-					.useremail(email)
-					.password(passwordEncoder.encode(password))
-					.createAt(n)
-					.fileAccessKey(key)	// 여기
-					.build();
-			
-			repository.save(entity);
-		}
+		repository.save(entity);
 	}
-	```
+}
+```
 
 - 위에 있는 이 로직으로 계정이 생성된 사용자의 키를 활용해서 다른 사람과 파일을 공유할 수 있도록 설계. 로그인을 하지 않아도 다른 사용자의 엑세스 키를 사용해서 파일을 주고 받을 수 있음
-	![](https://dayoon07.github.io/static-page-test/img/mycloud-key-screenshot.png)
-	![](https://dayoon07.github.io/static-page-test/img/mycloud-use-access-key.png)
+	
+![](https://dayoon07.github.io/static-page-test/img/mycloud-key-screenshot.png)
+![](https://dayoon07.github.io/static-page-test/img/mycloud-use-access-key.png)
 
 
