@@ -38,11 +38,11 @@ function particularDisplay(obj) {
 		const fileExtension = obj.contentFile.substring(obj.contentFile.lastIndexOf(".") + 1).toLowerCase();
 
 		if (fileExtension === 'jpg' || fileExtension === 'jpeg' || fileExtension === 'png' || fileExtension === 'gif' || fileExtension === 'bmp') {
-			mediaElement = `<img src="${obj.contentFile}" class="lg:w-96 w-full" />`;
+			mediaElement = `<img src="${location.origin}/mycloud${obj.contentFile}" class="lg:w-96 w-full" />`;
 		} else if (fileExtension === 'mp4' || fileExtension === 'webm' || fileExtension === 'ogg') {
-			mediaElement = `<video src="${obj.contentFile}" controls class="lg:w-96 w-full"></video>`;
+			mediaElement = `<video src="${location.origin}/mycloud${obj.contentFile}" controls class="lg:w-96 w-full"></video>`;
 		} else {
-			mediaElement = `<a href="${obj.contentFile}" download="${exten}" class="text-blue-500 hover:underline">파일 다운로드</a>`;
+			mediaElement = `<a href="${location.origin}/mycloud${obj.contentFile}" download="${exten}" class="text-blue-500 hover:underline">파일 다운로드</a>`;
 		}
 	} else {
 		mediaElement = `<p class="text-red-500">첨부된 파일이 없습니다.</p>`;
@@ -84,5 +84,5 @@ function formatDate() {
 	const ampm = hours >= 12 ? '오후' : '오전';
 	const hour12 = hours % 12 || 12;
 
-	return `${year}-${month}-${day} ${ampm} ${hour12}-${minutes}-${seconds}`;
+	return `${year}-${month}-${day}-${ampm}-${hour12}-${minutes}-${seconds}`;
 }
