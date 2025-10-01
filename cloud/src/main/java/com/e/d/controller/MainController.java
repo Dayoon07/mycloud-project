@@ -117,7 +117,7 @@ public class MainController {
 	        // 사용자 용량 정보가 없는 경우 (처음 사용자일 수 있음)
 	    	m.addAttribute("descSize", userSize);
 	        return "cloud/upload";
-	    } else if (userSize < 1000) {
+	    } else if (userSize < 1024) {
 	        // 용량이 제한 이하인 경우
 	    	m.addAttribute("descSize", userSize);
 	        return "cloud/upload";

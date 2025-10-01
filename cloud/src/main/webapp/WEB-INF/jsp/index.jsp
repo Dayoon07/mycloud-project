@@ -129,7 +129,7 @@
 							            </c:if>
 							  		</h3>
 							  		<p class="text-gray-500 dark:text-neutral-400">
-							  			${ mf.createAt.substring(0, 4) }년 ${ mf.createAt.substring(5, 6) }월 ${ mf.createAt.substring(7, 8) }일
+							  			${ mf.createAt.substring(0, 4) }년 ${ mf.createAt.substring(4, 6) }월 ${ mf.createAt.substring(6, 8) }일
 							  		</p>
 							  		<p class="mt-2 text-sm font-medium uppercase">
 							    		공개 여부 : 

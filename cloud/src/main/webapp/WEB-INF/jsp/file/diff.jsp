@@ -121,7 +121,7 @@
 												</div>
 											</td>
 											<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-												${ dfl.fileVo.createAt.substring(0, 4) }년 ${ dfl.fileVo.createAt.substring(5, 6) }월 ${ dfl.fileVo.createAt.substring(7, 8) }일
+												${ dfl.fileVo.createAt.substring(0, 4) }년 ${ dfl.fileVo.createAt.substring(4, 6) }월 ${ dfl.fileVo.createAt.substring(6, 8) }일
 											</td>
 											<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 												${ dfl.userVo.username }
@@ -165,7 +165,7 @@
 										</div>
 							  		</h3>
 							  		<p class="text-gray-500 dark:text-neutral-400">
-							  			${ dfl.fileVo.createAt.substring(0, 4) }년 ${ dfl.fileVo.createAt.substring(5, 6) }월 ${ dfl.fileVo.createAt.substring(7, 8) }일
+							  			${ dfl.fileVo.createAt.substring(0, 4) }년 ${ dfl.fileVo.createAt.substring(4, 6) }월 ${ dfl.fileVo.createAt.substring(6, 8) }일
 							  		</p>
 							  		<p class="text-sm">크기 : ${ dfl.fileVo.fileSize }MB</p>
 							  		<div class="flex space-x-2 justify-end absolute bottom-4 right-0">
