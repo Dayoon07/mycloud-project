@@ -50,7 +50,7 @@ function particularDisplay(obj) {
 
 	div.innerHTML = `
 	    <div>
-	        <img src="${location.origin}/source/img/q.png" onclick="closeMailModal()" 
+	        <img src="${location.origin}/mycloud/source/img/q.png" onclick="closeMailModal()" 
 	            class="w-12 h-12 cursor-pointer rounded-full p-4 hover:bg-gray-100">
 	    </div>
 	    <div style="font-size: 14px;">${obj.datetime}</div>
