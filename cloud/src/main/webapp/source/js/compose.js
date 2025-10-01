@@ -50,7 +50,7 @@ async function chk() {
 		const a = document.querySelector("#resc");
 		const div = document.getElementById("list");
 
-		const res = await fetch(`${location.origin}/searchEmails?email=${a.value}`, {
+		const res = await fetch(`${location.origin}/mycloud/searchEmails?email=${a.value}`, {
 			method: "POST",
 		});
 
@@ -111,7 +111,7 @@ document.getElementById("compose").addEventListener("click", async function(e) {
 	}
 
 	try {
-		const res = await fetch(`${location.origin}/sendMessage`, {
+		const res = await fetch(`${location.origin}/mycloud/sendMessage`, {
 			method: "POST",
 			body: f
 		});

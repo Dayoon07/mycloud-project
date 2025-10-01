@@ -2,7 +2,7 @@ async function fuckCorsConfig(id) {
 	try {
 		const fd = new FormData();
 		fd.append("msgId", id);
-		const res = await fetch(`${location.origin}/findMail`, {
+		const res = await fetch(`${location.origin}/mycloud/findMail`, {
 			method: "POST",
 			body: fd
 		});

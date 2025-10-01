@@ -26,7 +26,7 @@
 				        홈
 				    </a>
 				</li>
-		        <c:if test="${ not empty sessionScope.user and (descSize lt 1000 or empty descSize) }">
+		        <c:if test="${ not empty sessionScope.user and (descSize lt 1024 or empty descSize) }">
 		            <li>
 		                <a href="${ cl }/upload" class="flex items-center gap-2 block px-4 py-2 text-gray-700 hover:bg-blue-100 rounded-full">
 		                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -98,15 +98,15 @@
                     	내 파일 <span class="md:inline hidden">•</span><br class="md:hidden">
                     	사용 용량 ${ descSize == null ? '없음' : descSize += 'MB' } 
                     	<c:if test="${ not empty descSize }">
-                    		<span class="md:inline hidden">• </span><br class="md:hidden"> ${ descSize / 10 }% 사용
+                    		<span class="md:inline hidden">• </span><br class="md:hidden"> ${ (descSize / 1024) * 100 }% 사용
                     	</c:if>
                     </h2>
-					<c:if test="${ descSize > 1000 }">
+					<c:if test="${ descSize > 1024 }">
                     	<h1 class="text-xl font-semibold">용량을 초과했습니다.</h1>
                     </c:if>
-                    <c:if test="${ descSize < 1000 }">
+                    <c:if test="${ descSize < 1024 }">
 						<div class="w-full bg-gray-200 h-2.5 rounded-full dark:bg-gray-700">
-							<div class="bg-blue-600 h-2.5 rounded-full" style="width: ${ descSize / 10 }%;"></div>
+							<div class="bg-blue-600 h-2.5 rounded-full" style="width: ${ (descSize / 1024) * 100 }%;"></div>
 						</div>
 					</c:if>
                     

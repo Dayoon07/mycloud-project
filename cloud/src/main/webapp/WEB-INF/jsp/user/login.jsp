@@ -12,12 +12,6 @@
 </head>
 <body>
 
-	<%
-	    String c = request.getRequestURL().toString();
-	    String url = c.substring(0, c.indexOf("/", c.indexOf("://") + 3)) + "/mycloud";
-	    request.setAttribute("fuck", url);
-	%>
-
 	<header style="height: 60px;" class="fixed top-0 left-0 bg-white z-20 w-full flex justify-between align-center px-5 py-4 border-b">
 		<div style="height: 60px; display: flex;">
 			<a href="${ cl }/" class="font-semibold text-xl">마이 <span class="text-blue-600">클라우드</span></a>
@@ -25,12 +19,12 @@
 		<c:choose>
 			<c:when test="${ not empty sessionScope.user }">
 				<div class="flex justify-between items-center">
-					<img src="${ fuck }/source/img/mycloud-profile.jpeg" class="cursor-pointer relative" onclick="me()" 
+					<img src="${ cl }/source/img/mycloud-profile.jpeg" class="cursor-pointer relative" onclick="me()" 
 						alt="${ sessionScope.user.username }'s 프로필 이미지" width="40" height="40">
 						
 					<div id="mo" class="hidden w-auto h-auto absolute top-12 right-12 border border-black z-50 bg-gray-100 px-4 py-4 rounded-lg shadow-xl">
 					    <div class="flex mb-4 pr-4">
-					        <img src="${ fuck }/source/img/mycloud-profile.jpeg" class="w-16 h-16 rounded-full object-cover cursor-pointer mr-3" 
+					        <img src="${ cl }/source/img/mycloud-profile.jpeg" class="w-16 h-16 rounded-full object-cover cursor-pointer mr-3" 
 					            onclick="side()" alt="${ sessionScope.user.username }의 프로필 이미지">
 					        <div>
 					        	<p class="text-lg font-semibold">${ sessionScope.user.username }</p>

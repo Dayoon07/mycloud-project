@@ -76,7 +76,7 @@ document.getElementById("upload-btn").addEventListener("click", function() {
 	uploadText.textContent = "업로드 중...";
 
 	const xhr = new XMLHttpRequest();
-	xhr.open("POST", `${location.origin}/fileupload`, true);
+	xhr.open("POST", `${location.origin}/mycloud/fileupload`, true);
 	xhr.setRequestHeader("Accept", "application/json");
 
 	xhr.upload.onprogress = function(event) {

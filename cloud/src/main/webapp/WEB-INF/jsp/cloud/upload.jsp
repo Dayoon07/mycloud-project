@@ -32,7 +32,7 @@
 				        홈
 				    </a>
 				</li>
-		        <c:if test="${ not empty sessionScope.user and (descSize lt 1000 or empty descSize) }">
+		        <c:if test="${ not empty sessionScope.user and (descSize lt 1024 or empty descSize) }">
 		            <li>
 		                <a href="${ cl }/upload" class="flex items-center gap-2 block px-4 py-2 text-gray-700 bg-blue-100 rounded-full">
 		                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

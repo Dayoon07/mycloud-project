@@ -4,12 +4,6 @@
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <c:set var="cl" value="${ pageContext.request.contextPath }" />
 
-	<%
-	    String c = request.getRequestURL().toString();
-	    String url = c.substring(0, c.indexOf("/", c.indexOf("://") + 3));
-	    request.setAttribute("fuck", url);
-	%>
-
 	<header style="height: 60px;" class="w-full flex justify-between align-center px-5 py-4 border-b">
 		<div class="flex">
 			<span onclick="openSide()" class="block lg:hidden mr-5 text-lg cursor-pointer">&#9776;</span>
@@ -18,12 +12,12 @@
 		<c:choose>
 			<c:when test="${ not empty sessionScope.user }">
 				<div class="flex justify-between items-center">
-					<img src="${ fuck }/source/img/mycloud-profile.jpeg" class="cursor-pointer relative" onclick="me()" 
+					<img src="${ cl }/source/img/mycloud-profile.jpeg" class="cursor-pointer relative" onclick="me()" 
 						alt="${ sessionScope.user.username }'s 프로필 이미지" width="40" height="40">
 						
 					<div id="mo" class="hidden w-auto h-auto absolute top-14 right-0 z-50 bg-white shadow-xl border">
 					    <div class="flex p-4 pr-8">
-					        <img src="${ fuck }/source/img/mycloud-profile.jpeg" class="w-16 h-16 rounded-full object-cover cursor-pointer mr-3" 
+					        <img src="${ cl }/source/img/mycloud-profile.jpeg" class="w-16 h-16 rounded-full object-cover cursor-pointer mr-3" 
 					            onclick="side()" alt="${ sessionScope.user.username }의 프로필 이미지">
 					        <div>
 					        	<p class="text-lg font-semibold">${ sessionScope.user.username }</p>

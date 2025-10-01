@@ -37,15 +37,15 @@
                     	최근 파일 <span class="md:inline hidden">•</span><br class="md:hidden">
                     	사용 용량 ${ descSize == null ? '없음' : descSize += 'MB' } 
                     	<c:if test="${ not empty descSize }">
-                    		<span class="md:inline hidden">• </span><br class="md:hidden"> ${ descSize / 10 }% 사용
+                    		<span class="md:inline hidden">• </span><br class="md:hidden"> ${ (descSize / 1024) * 100 }% 사용
                     	</c:if>
                     </h2>
-                    <c:if test="${ not empty descSize and descSize > 1000 }">
+                    <c:if test="${ not empty descSize and descSize > 1024 }">
                     	<h1 class="text-xl font-semibold">용량을 초과했습니다.</h1>
                     </c:if>
-                    <c:if test="${ not empty descSize and descSize < 1000 }">
+                    <c:if test="${ not empty descSize and descSize < 1024 }">
 						<div class="w-full bg-gray-200 h-2.5 rounded-full dark:bg-gray-700">
-							<div class="bg-blue-600 h-2.5 rounded-full" style="width: ${ descSize / 10 }%;"></div>
+							<div class="bg-blue-600 h-2.5 rounded-full" style="width: ${ (descSize / 1024) * 100 }%;"></div>
 						</div>
 					</c:if>
                     
