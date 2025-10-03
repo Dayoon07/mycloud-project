@@ -127,6 +127,7 @@ document.getElementById("compose").addEventListener("click", async function(e) {
 			receiveId.value = "";
 			file.value = "";
 			previewContainer.innerHTML = "";
+			alert(t);
 		} else {
 			alert("메시지 전송에 실패했습니다.");
 		}
