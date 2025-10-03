@@ -37,7 +37,8 @@
                     	최근 파일 <span class="md:inline hidden">•</span><br class="md:hidden">
                     	사용 용량 ${ descSize == null ? '없음' : descSize += 'MB' } 
                     	<c:if test="${ not empty descSize }">
-                    		<span class="md:inline hidden">• </span><br class="md:hidden"> ${ (descSize / 1024) * 100 }% 사용
+                    		<span class="md:inline hidden">• </span><br class="md:hidden">
+                    		<fmt:formatNumber value="${(descSize / 1024) * 100}" type="number" maxFractionDigits="2" />% 사용
                     	</c:if>
                     </h2>
                     <c:if test="${ not empty descSize and descSize > 1024 }">

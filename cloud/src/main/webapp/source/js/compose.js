@@ -7,6 +7,14 @@ function handleFilePreview() {
 	if (!file.files || file.files.length === 0) return;
 
 	Array.from(file.files).forEach(fileItem => {
+		// 용량 체크 (100MB 제한)
+		const maxSize = 100 * 1024 * 1024; // 100MB
+		if (fileItem.size > maxSize) {
+			alert(`${fileItem.name} 파일이 100MB를 초과했습니다.`);
+			file.value = ""; // 파일 선택 초기화
+			return;
+		}
+
 		const reader = new FileReader();
 		reader.onload = function(e) {
 			const previewElement = document.createElement("div");
@@ -18,7 +26,7 @@ function handleFilePreview() {
 			removeBtn.classList.add("ml-2", "text-red-500", "hover:text-red-700");
 			removeBtn.onclick = function() {
 				previewContainer.innerHTML = "";
-				document.getElementById("file").value = "";
+				file.value = "";
 			};
 			previewElement.appendChild(removeBtn);
 

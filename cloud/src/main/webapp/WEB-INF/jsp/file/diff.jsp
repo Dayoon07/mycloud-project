@@ -109,16 +109,16 @@
 						    </thead>
 						    <tbody class="bg-white divide-y divide-gray-200">
 						    	<c:if test="${ not empty diffFileList }">
-						    		${ diffFileList[0].userVo.username }
+						    		${ diffFileList[0].userVo.username } &lt;${ diffFileList[0].userVo.useremail }&gt;
 									<c:forEach var="dfl" items="${ diffFileList }">
 										<tr class="hover:bg-gray-100 cursor-pointer">
 											<td class="px-6 py-4 whitespace-nowrap">
 												<div class="flex items-center">
-													<c:if test="${ dfl.fileVo.fileName.length() > 30 }">
-														<a href="${ dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="font-medium">${ dfl.fileVo.fileName.substring(0, 30) }...</a>
+													<c:if test="${ cl += dfl.fileVo.fileName.length() > 30 }">
+														<a href="${ cl += dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="font-medium">${ dfl.fileVo.fileName.substring(0, 30) }...</a>
 													</c:if>
-													<c:if test="${ dfl.fileVo.fileName.length() < 30 }">
-														<a href="${ dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="font-medium">${ dfl.fileVo.fileName }</a>
+													<c:if test="${ cl += dfl.fileVo.fileName.length() < 30 }">
+														<a href="${ cl += dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="font-medium">${ dfl.fileVo.fileName }</a>
 													</c:if>
 												</div>
 											</td>
@@ -135,7 +135,7 @@
 											</td>
 											<td class="whitespace-nowrap text-sm text-right">
 												<div class="flex space-x-2 justify-end">
-													<a href="${ dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="text-blue-600 hover:text-blue-800 mr-3">
+													<a href="${ cl += dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="text-blue-600 hover:text-blue-800 mr-3">
 											            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 											                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
 											                <polyline points="7 10 12 15 17 10"></polyline>
@@ -161,10 +161,10 @@
 									<h3 class="text-lg font-bold text-gray-800 dark:text-white">
 							    		<div class="flex items-center">
 											<c:if test="${ dfl.fileVo.fileName.length() > 30 }">
-												<a href="${ dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="font-medium">${ dfl.fileVo.fileName.substring(0, 30) }...</a>
+												<a href="${ cl += dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="font-medium">${ dfl.fileVo.fileName.substring(0, 30) }...</a>
 											</c:if>
 											<c:if test="${ dfl.fileVo.fileName.length() < 30 }">
-												<a href="${ dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="font-medium">${ dfl.fileVo.fileName }</a>
+												<a href="${ cl += dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="font-medium">${ dfl.fileVo.fileName }</a>
 											</c:if>
 										</div>
 							  		</h3>
@@ -173,7 +173,7 @@
 							  		</p>
 							  		<p class="text-sm">크기 : ${ dfl.fileVo.fileSize }MB</p>
 							  		<div class="flex space-x-2 justify-end absolute bottom-4 right-0">
-													<a href="${ dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="text-blue-600 hover:text-blue-800 mr-3">
+													<a href="${ cl += dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="text-blue-600 hover:text-blue-800 mr-3">
 											            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 											                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
 											                <polyline points="7 10 12 15 17 10"></polyline>

@@ -100,7 +100,8 @@
                     	내 파일 <span class="md:inline hidden">•</span><br class="md:hidden">
                     	사용 용량 ${ descSize == null ? '없음' : descSize += 'MB' } 
                     	<c:if test="${ not empty descSize }">
-                    		<span class="md:inline hidden">• </span><br class="md:hidden"> ${ (descSize / 1024) * 100 }% 사용
+                    		<span class="md:inline hidden">• </span><br class="md:hidden">
+                    		<fmt:formatNumber value="${(descSize / 1024) * 100}" type="number" maxFractionDigits="2" />% 사용
                     	</c:if>
                     </h2>
 					<c:if test="${ descSize > 1024 }">
@@ -173,7 +174,7 @@
 							                </td>
 							                <td class="px-6 py-4 whitespace-nowrap text-sm text-right">
 											    <div class="flex space-x-2 justify-end">
-											        <a href="${ mf.fileLocation }" download="${ mf.fileName }" class="text-blue-600 hover:text-blue-800 mr-3">
+											        <a href="${ cl += mf.fileLocation }" download="${ mf.fileName }" class="text-blue-600 hover:text-blue-800 mr-3">
 											            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 											                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
 											                <polyline points="7 10 12 15 17 10"></polyline>
@@ -228,7 +229,7 @@
 										        <line x1="14" y1="11" x2="14" y2="17"></line>
 										    </svg>
 										</button>
-							  			<a href="${ mf.fileLocation }" download="${ mf.fileName }" class="text-blue-600 hover:text-blue-800 mr-3">
+							  			<a href="${ cl += mf.fileLocation }" download="${ mf.fileName }" class="text-blue-600 hover:text-blue-800 mr-3">
 										    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 										        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
 										        <polyline points="7 10 12 15 17 10"></polyline>
