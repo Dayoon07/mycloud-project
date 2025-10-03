@@ -114,10 +114,10 @@
 										<tr class="hover:bg-gray-100 cursor-pointer">
 											<td class="px-6 py-4 whitespace-nowrap">
 												<div class="flex items-center">
-													<c:if test="${ cl += dfl.fileVo.fileName.length() > 30 }">
+													<c:if test="${ dfl.fileVo.fileName.length() > 30 }">
 														<a href="${ cl += dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="font-medium">${ dfl.fileVo.fileName.substring(0, 30) }...</a>
 													</c:if>
-													<c:if test="${ cl += dfl.fileVo.fileName.length() < 30 }">
+													<c:if test="${ dfl.fileVo.fileName.length() < 30 }">
 														<a href="${ cl += dfl.fileVo.fileLocation }" download="${ dfl.fileVo.fileName }" class="font-medium">${ dfl.fileVo.fileName }</a>
 													</c:if>
 												</div>
