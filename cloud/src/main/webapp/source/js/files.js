@@ -3,7 +3,7 @@ async function deleteFile(pkVal) {
 	fo.append("fileId", pkVal);
 
 	try {
-		const res = await fetch(`${location.origin}/deleteFile`, {
+		const res = await fetch(`${location.origin}/mycloud/deleteFile`, {
 			method: "POST",
 			body: fo
 		});
@@ -24,7 +24,7 @@ async function changePrivate(k) {
 	f.append("fileId", k);
 	
 	try {
-		const res = await fetch(`${location.origin}/changePrivate`, {
+		const res = await fetch(`${location.origin}/mycloud/changePrivate`, {
 			method: "POST",
 			body: f
 		});

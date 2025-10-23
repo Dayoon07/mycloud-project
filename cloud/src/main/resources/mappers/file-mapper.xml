@@ -13,15 +13,17 @@
 	    <result property="fileLink" column="file_link"/>
 	</resultMap>
 	
+	<resultMap id="userResultMap" type="com.e.d.model.vo.UserVo">
+		<id property="userId" column="user_id" />
+	    <result property="username" column="username" />
+	    <result property="useremail" column="useremail" />
+	    <result property="password" column="password" />
+	    <result property="createAt" column="create_at" />
+	    <result property="fileAccessKey" column="file_access_key" />
+	</resultMap>
+	
 	<resultMap id="UserFileResultMap" type="com.e.d.model.dto.UserFileDto">
-	    <association property="userVo" javaType="com.e.d.model.vo.UserVo">
-	    	<id property="userId" column="user_id" />
-	    	<result property="username" column="username" />
-	    	<result property="useremail" column="useremail" />
-	    	<result property="password" column="password" />
-	    	<result property="createAt" column="create_at" />
-	    	<result property="fileAccessKey" column="file_access_key" />
-	    </association>
+	    <association property="userVo" resultMap="userResultMap" />
 	    <association property="fileVo" resultMap="fileResultMap" />
 	</resultMap>
 

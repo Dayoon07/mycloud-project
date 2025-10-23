@@ -21,7 +21,7 @@ async function submit() {
 	
 		try {
 			// 비동기로 폼 데이터 전송 (POST 방식)
-			const res = await fetch(`${location.origin}/signup`, {
+			const res = await fetch(`${location.origin}/mycloud/signup`, {
 				method: 'POST',
 				body: formData
 			});
@@ -71,7 +71,7 @@ document.getElementById('username').addEventListener('input', function() {
 	var username = document.getElementById('username').value;
 
 	// 사용자 이름 중복 여부를 체크
-	fetch(`${location.origin}/chkUsrName?username=${username}`, { method: 'POST' })
+	fetch(`${location.origin}/mycloud/chkUsrName?username=${username}`, { method: 'POST' })
 		.then(response => response.json())
 		.then(data => {
 			isUsernameAvailable = data; // 중복 여부 상태 업데이트

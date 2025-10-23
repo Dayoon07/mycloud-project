@@ -14,7 +14,7 @@ document.getElementById("subBtn").addEventListener("click", async function(e) {
 	const fd = new FormData();
 	fd.append("userId", a.value);
 	try {
-		const res = await fetch(`${location.origin}/dropAccount`, {
+		const res = await fetch(`${location.origin}/mycloud/dropAccount`, {
 			method: "POST",
 			body: fd
 		});

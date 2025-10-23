@@ -7,6 +7,14 @@ function handleFilePreview() {
 	if (!file.files || file.files.length === 0) return;
 
 	Array.from(file.files).forEach(fileItem => {
+		// 용량 체크 (100MB 제한)
+		const maxSize = 100 * 1024 * 1024; // 100MB
+		if (fileItem.size > maxSize) {
+			alert(`${fileItem.name} 파일이 100MB를 초과했습니다.`);
+			file.value = ""; // 파일 선택 초기화
+			return;
+		}
+
 		const reader = new FileReader();
 		reader.onload = function(e) {
 			const previewElement = document.createElement("div");
@@ -18,7 +26,7 @@ function handleFilePreview() {
 			removeBtn.classList.add("ml-2", "text-red-500", "hover:text-red-700");
 			removeBtn.onclick = function() {
 				previewContainer.innerHTML = "";
-				document.getElementById("file").value = "";
+				file.value = "";
 			};
 			previewElement.appendChild(removeBtn);
 
@@ -50,7 +58,7 @@ async function chk() {
 		const a = document.querySelector("#resc");
 		const div = document.getElementById("list");
 
-		const res = await fetch(`${location.origin}/searchEmails?email=${a.value}`, {
+		const res = await fetch(`${location.origin}/mycloud/searchEmails?email=${a.value}`, {
 			method: "POST",
 		});
 
@@ -111,7 +119,7 @@ document.getElementById("compose").addEventListener("click", async function(e) {
 	}
 
 	try {
-		const res = await fetch(`${location.origin}/sendMessage`, {
+		const res = await fetch(`${location.origin}/mycloud/sendMessage`, {
 			method: "POST",
 			body: f
 		});
@@ -127,6 +135,7 @@ document.getElementById("compose").addEventListener("click", async function(e) {
 			receiveId.value = "";
 			file.value = "";
 			previewContainer.innerHTML = "";
+			alert(t);
 		} else {
 			alert("메시지 전송에 실패했습니다.");
 		}

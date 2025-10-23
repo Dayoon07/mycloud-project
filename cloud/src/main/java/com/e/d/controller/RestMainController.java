@@ -86,7 +86,7 @@ public class RestMainController {
 	            messageService.send(resc, title, message, receiveId, s);
 	        }
 	    }
-		return "";
+		return "성공적으로 메세지를 전송했습니다.";
 	}
 	
 	@PostMapping("/findMail")
