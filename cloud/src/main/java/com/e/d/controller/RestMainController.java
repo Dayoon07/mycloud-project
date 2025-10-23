@@ -23,6 +23,7 @@ import com.e.d.model.service.MessageService;
 import com.e.d.model.service.UserService;
 import com.e.d.model.vo.UserVo;
 
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -77,7 +78,7 @@ public class RestMainController {
 	@PostMapping("/sendMessage")
 	public String sendMessage(@RequestParam String resc, @RequestParam String title, 
 			@RequestParam String message, @RequestParam long receiveId, 
-			@RequestParam(required = false) MultipartFile file, HttpSession s) throws IOException {
+			@RequestParam(required = false) MultipartFile file, HttpSession s) throws IOException, MessagingException {
 		UserEntity user = (UserEntity) s.getAttribute("user");
 		if (user != null) {
 	        if (file != null && !file.isEmpty()) {

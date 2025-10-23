@@ -101,19 +101,39 @@ document.getElementById("compose").addEventListener("click", async function(e) {
 	const file = document.querySelector("input[type='file']");
 	const previewContainer = document.getElementById("preview");
 
-	if (resc.value == "" || title.value == "" || message.value == "") {
+	if (resc.value === "" || title.value === "" || message.value === "") {
 		e.preventDefault();
 		alert("입력칸이 비어있습니다.");
 		return;
 	}
 
+	// 🌀 로딩 오버레이 생성
+	const loadingOverlay = document.createElement("div");
+	loadingOverlay.className =
+		"fixed inset-0 bg-black/50 flex items-center justify-center z-50";
+
+	const spinner = document.createElement("div");
+	spinner.className =
+		"w-16 h-16 border-4 border-t-transparent border-white rounded-full animate-spin";
+
+	const loadingText = document.createElement("p");
+	loadingText.textContent = "메시지를 전송 중입니다...";
+	loadingText.className = "text-white mt-4 text-lg font-semibold";
+
+	const loadingContainer = document.createElement("div");
+	loadingContainer.className = "flex flex-col items-center";
+	loadingContainer.appendChild(spinner);
+	loadingContainer.appendChild(loadingText);
+	loadingOverlay.appendChild(loadingContainer);
+	document.body.appendChild(loadingOverlay);
+
+	// 📦 FormData 생성
 	const f = new FormData();
 	f.append("resc", resc.value);
 	f.append("title", title.value);
 	f.append("message", message.value);
 	f.append("receiveId", receiveId.value);
 
-	// 파일이 있는 경우에만 추가
 	if (file.files && file.files.length > 0) {
 		f.append("file", file.files[0]);
 	}
@@ -128,13 +148,14 @@ document.getElementById("compose").addEventListener("click", async function(e) {
 			const t = await res.text();
 			console.log(t);
 
-			// 성공 시 폼 초기화
+			// 폼 초기화
 			resc.value = "";
 			title.value = "";
 			message.value = "";
 			receiveId.value = "";
 			file.value = "";
 			previewContainer.innerHTML = "";
+
 			alert(t);
 		} else {
 			alert("메시지 전송에 실패했습니다.");
@@ -142,6 +163,10 @@ document.getElementById("compose").addEventListener("click", async function(e) {
 	} catch (error) {
 		console.error("메시지 전송 중 오류 발생:", error);
 		alert("메시지 전송 중 오류가 발생했습니다.");
+	} finally {
+		// 🧹 로딩 오버레이 제거
+		document.body.removeChild(loadingOverlay);
 	}
 });
+
 document.getElementById("file").addEventListener("change", handleFilePreview);

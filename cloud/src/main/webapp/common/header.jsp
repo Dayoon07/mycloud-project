@@ -4,15 +4,12 @@
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <c:set var="cl" value="${ pageContext.request.contextPath }" />
 
-<<<<<<< HEAD
 	<%
 	    String c = request.getRequestURL().toString();
 	    String url = c.substring(0, c.indexOf("/", c.indexOf("://") + 3)) + "/mycloud";
 	    request.setAttribute("fuck", url);
 	%>
-
-=======
->>>>>>> branch 'main' of https://github.com/Dayoon07/mycloud-project.git
+	
 	<header style="height: 60px;" class="w-full flex justify-between align-center px-5 py-4 border-b">
 		<div class="flex">
 			<span onclick="openSide()" class="block lg:hidden mr-5 text-lg cursor-pointer">&#9776;</span>
