@@ -6,7 +6,7 @@
 
 	<%
 	    String c = request.getRequestURL().toString();
-	    String url = c.substring(0, c.indexOf("/", c.indexOf("://") + 3)) + "/mycloud";
+	    String url = c.substring(0, c.indexOf("/", c.indexOf("://") + 3));
 	    request.setAttribute("fuck", url);
 	%>
 
