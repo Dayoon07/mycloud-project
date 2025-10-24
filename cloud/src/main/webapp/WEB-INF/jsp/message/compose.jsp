@@ -99,7 +99,7 @@
                 	<div>
 		                <input type="text" id="resc" placeholder="수신자 (이메일)" required class="w-full px-4 py-2 text-md border-b focus:outline-none focus:border-black relative" oninput="chk()"><br>
 		                <input type="text" id="title" placeholder="제목" required class="w-full px-4 py-2 text-md border-b focus:outline-none focus:border-black"><br>
-		                <input type="hidden" id="receiveId" required readonly>
+		                <input type="hidden" id="receiverId" required readonly>
 		                <div id="preview" class="border-b"></div>
 		                <textarea id="message" rows="10" class="block p-2.5 w-full text-sm border-b focus:outline-none resize-none"></textarea>
 		                <div class="flex items-center">

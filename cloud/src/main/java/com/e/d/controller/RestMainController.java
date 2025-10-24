@@ -77,14 +77,14 @@ public class RestMainController {
 	
 	@PostMapping("/sendMessage")
 	public String sendMessage(@RequestParam String resc, @RequestParam String title, 
-			@RequestParam String message, @RequestParam long receiveId, 
+			@RequestParam String message, @RequestParam long receiverId, 
 			@RequestParam(required = false) MultipartFile file, HttpSession s) throws IOException, MessagingException {
 		UserEntity user = (UserEntity) s.getAttribute("user");
 		if (user != null) {
 	        if (file != null && !file.isEmpty()) {
-	            messageService.send(resc, title, message, receiveId, file, s);
+	            messageService.send(resc, title, message, receiverId, file, s);
 	        } else {
-	            messageService.send(resc, title, message, receiveId, s);
+	            messageService.send(resc, title, message, receiverId, s);
 	        }
 	    }
 		return "성공적으로 메세지를 전송했습니다.";

@@ -9,6 +9,6 @@ import com.e.d.model.entity.MessageEntity;
 
 @Repository
 public interface MessageRepository extends JpaRepository<MessageEntity, Long> {
-	List<MessageEntity> findByReceiveIdOrderByDatetimeDesc(long receiveId);
-	void deleteByReceiveId(long receiveId);
+	List<MessageEntity> findByReceiverIdOrderByDatetimeDesc(long receiveId);
+	void deleteByReceiverId(long receiveId);
 }

@@ -10,7 +10,7 @@ public class MessageVo {
 	private long msgId;
 	private String sender;
 	private String receiver;
-	private long receiveId;
+	private long receiverId;
 	private String title;
 	private String content;
 	private String datetime;

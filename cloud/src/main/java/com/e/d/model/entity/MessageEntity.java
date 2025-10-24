@@ -22,8 +22,8 @@ public class MessageEntity {
 	@Column(name = "receiver", nullable = false)
 	private String receiver;
 	
-	@Column(name = "receive_id", nullable = false)
-	private long receiveId;
+	@Column(name = "receiver_id", nullable = false)
+	private long receiverId;
 	
 	@Column(name = "title", nullable = false)
 	private String title;

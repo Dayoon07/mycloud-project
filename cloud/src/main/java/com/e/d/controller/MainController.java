@@ -1,6 +1,7 @@
 package com.e.d.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.e.d.config.AsyncConfig;
+import com.e.d.model.entity.MessageEntity;
 import com.e.d.model.entity.UserEntity;
 import com.e.d.model.mapper.FileMapper;
 import com.e.d.model.mapper.MessageMapper;
@@ -47,6 +49,9 @@ public class MainController {
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+
+	@Autowired
+	private final AsyncConfig asyncConfig;
 	
 	@GetMapping("/")
 	public String index(Model m, HttpSession s) {
@@ -160,9 +165,9 @@ public class MainController {
 		UserEntity user = (UserEntity) s.getAttribute("user");
 		if (user == null) return "user/login";
 		
-		if (!messageRepository.findByReceiveIdOrderByDatetimeDesc(user.getUserId()).isEmpty()) {
-			m.addAttribute("chkMymsg", messageRepository.findByReceiveIdOrderByDatetimeDesc(user.getUserId()));
-		}
+		List<MessageEntity> list = messageRepository.findByReceiverIdOrderByDatetimeDesc(user.getUserId());
+		
+		if (!list.isEmpty()) m.addAttribute("chkMymsg", list);
 		m.addAttribute("descSize", fileService.selectMyDescSize(user.getUserId()));
 		return "message/chkmsg";
 	}

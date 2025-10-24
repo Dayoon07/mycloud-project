@@ -6,7 +6,7 @@
 	    <id property="msgId" column="MSG_ID"/>
 	    <result property="sender" column="SENDER"/>
 	    <result property="receiver" column="RECEIVER"/>
-	    <result property="receiveId" column="RECEIVE_ID"/>
+	    <result property="receiverId" column="RECEIVER_ID"/>
 	    <result property="title" column="TITLE"/>
 	    <result property="content" column="CONTENT"/>
 	    <result property="datetime" column="DATETIME"/>

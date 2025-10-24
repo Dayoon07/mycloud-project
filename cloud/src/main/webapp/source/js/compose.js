@@ -90,14 +90,14 @@ function first() {
 
 function wow(email, id) {
 	document.getElementById("resc").value = email;
-	document.getElementById("receiveId").value = id;
+	document.getElementById("receiverId").value = id;
 }
 
 document.getElementById("compose").addEventListener("click", async function(e) {
 	const resc = document.getElementById("resc");
 	const title = document.getElementById("title");
 	const message = document.getElementById("message");
-	const receiveId = document.getElementById("receiveId");
+	const receiverId = document.getElementById("receiverId");
 	const file = document.querySelector("input[type='file']");
 	const previewContainer = document.getElementById("preview");
 
@@ -132,7 +132,7 @@ document.getElementById("compose").addEventListener("click", async function(e) {
 	f.append("resc", resc.value);
 	f.append("title", title.value);
 	f.append("message", message.value);
-	f.append("receiveId", receiveId.value);
+	f.append("receiverId", receiverId.value);
 
 	if (file.files && file.files.length > 0) {
 		f.append("file", file.files[0]);
@@ -152,7 +152,7 @@ document.getElementById("compose").addEventListener("click", async function(e) {
 			resc.value = "";
 			title.value = "";
 			message.value = "";
-			receiveId.value = "";
+			receiverId.value = "";
 			file.value = "";
 			previewContainer.innerHTML = "";
 
